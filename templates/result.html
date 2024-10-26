@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+        h1 {
+            color: #ffa500;
+            font-size: 2.5em;
+        }
+        p {
+            font-size: 1.5em;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: #ffa500;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Prediction Result</h1>
+        <p>Your review sentiment: {{ sentiment }}</p>
+        {% if sentiment == 'Positive' %}
+            <img src="/static/happy_smiley.png" alt="Happy Smiley">
+        {% elif sentiment == 'Negative' %}
+            <img src="/static/sad_smiley.png" alt="Sad Smiley">
+        {% else %}
+            <img src="/static/no_review.png" alt="No Review">
+        {% endif %}
+        <br><br>
+        <a href="/" style="color: #fff; text-decoration: none;">Back</a>
+    </div>
+</body>
+</html>
