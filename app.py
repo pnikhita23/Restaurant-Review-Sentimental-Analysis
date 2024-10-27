@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
+from flask_frozen import Freezer  # Import Frozen-Flask
 
 app = Flask(__name__)
 
@@ -11,6 +12,9 @@ with open('logistic_regression_model.pkl', 'rb') as file:
 # Load the TfidfVectorizer
 with open('tfidf_vectorizer.pkl', 'rb') as file:
     tfidf = pickle.load(file)
+
+# Configure Freezer for generating static files
+freezer = Freezer(app)
 
 @app.route('/')
 def home():
@@ -35,5 +39,7 @@ def predict():
 
     return render_template('result.html', sentiment=sentiment)
 
+# Run the freezer to generate static files
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.config['FREEZER_RELATIVE_URLS'] = True
+    freezer.freeze()  # Generate static files
